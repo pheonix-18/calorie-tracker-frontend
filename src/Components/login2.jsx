@@ -1,9 +1,18 @@
 // import react
 import React from 'react';
+// import browser router and route from react-router-dom
+import { BrowserRouter as Router, Route, useNavigate } from 'react-router-dom';
+
+
 import wallpaper from '../wallpaper_2.jpeg';
 import logo from '../logo.png';
+import { AuthContext } from '../AuthProvider.jsx';
+// Import cookies from js-cookie
+import Cookies from 'js-cookie';
+
 // create a Special Login function component 
 export default function Login2() {
+    const {handleLogin} = React.useContext(AuthContext);
     function handleGoogleSubmit(e) {
         e.preventDefault();
         console.log("Google button clicked");
@@ -12,31 +21,10 @@ export default function Login2() {
     function handleLoginSubmit(e) {
         e.preventDefault();
         // Display the email and password in the console
-        console.log(document.getElementById('email').value);
-        console.log(document.getElementById('password').value);
-
-        
-        fetch('http://localhost:8080/validate/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-            }),
-        })
-        // check the response status and print it in the console
-        .then((response) => {
-            console.log(response.status);
-            if (response.status === 200) {
-                window.alert("Login Successful");
-            } else {
-                window.alert("Login Failed");
-            }
-        })
+        handleLogin(document.getElementById('email').value, document.getElementById('password').value);
     }
 
+    
     return (
 <section className="h-screen w-screen">
   <div className="px-6 h-fill text-black">
@@ -134,3 +122,4 @@ export default function Login2() {
 </section>
 )
 }
+
