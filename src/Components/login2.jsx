@@ -96,7 +96,7 @@ export default function Login2() {
                 >Remember me</label
               >
             </div>
-            <a href="#!" className="text-gray-800">Forgot password?</a>
+            <a href="#!" className="text-gray-100">Forgot password?</a>
           </div>
 
           <div className="text-center lg:text-left">
